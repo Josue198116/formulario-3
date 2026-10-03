@@ -1,0 +1,139 @@
+:root {
+  --ink: #1d2b3a;
+  --muted: #5d6b7a;
+  --paper: #f3f6f8;
+  --card: #ffffff;
+  --line: #d5dde4;
+  --brand: #0f6b78;
+  --brand-dark: #0a4f59;
+  --error: #b3261e;
+  --error-bg: #fdecea;
+  --ok: #1b6b3a;
+  --ok-bg: #e7f5ec;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.5;
+}
+
+.page-shell {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 48px 20px 64px;
+}
+
+.page-header { margin-bottom: 28px; }
+.eyebrow { color: var(--brand); font-weight: 600; font-size: .95rem; }
+.page-header h1 { margin: 6px 0 8px; font-size: 2.6rem; line-height: 1.1; letter-spacing: -0.02em; }
+.page-header p { margin: 0; color: var(--muted); font-size: 1.05rem; }
+
+.form-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 28px;
+}
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.form-field { display: flex; flex-direction: column; gap: 6px; }
+.form-field-full { grid-column: 1 / -1; }
+
+label, legend { font-weight: 600; font-size: .95rem; }
+.optional { font-weight: 400; color: var(--muted); }
+
+input[type="text"], input[type="email"], select {
+  width: 100%;
+  padding: 11px 12px;
+  font: inherit;
+  color: var(--ink);
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  transition: border-color .15s, box-shadow .15s;
+}
+input::placeholder { color: #93a0ad; }
+input:focus-visible, select:focus-visible, button:focus-visible {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(15, 107, 120, .25);
+}
+
+.test-fields { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+
+.choice-field { border: 0; padding: 0; margin: 0; min-width: 0; }
+.choice-field legend { padding: 0; margin-bottom: 8px; }
+.choice-options { display: flex; flex-wrap: wrap; gap: 10px; }
+.choice-option {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color .15s, background .15s;
+}
+.choice-option input { accent-color: var(--brand); margin: 0; }
+.choice-option:has(input:checked) { border-color: var(--brand); background: #e6f3f5; }
+
+.submit-button {
+  margin-top: 24px;
+  width: 100%;
+  padding: 13px 18px;
+  font: inherit; font-weight: 600; font-size: 1rem;
+  color: #fff; background: var(--brand);
+  border: 0; border-radius: 8px;
+  cursor: pointer;
+  transition: background .15s;
+}
+.submit-button:hover { background: var(--brand-dark); }
+
+/* Campos con error (los pone el JavaScript) */
+.alert-input { border-color: var(--error) !important; }
+.alert-label { color: var(--error); }
+fieldset.alert-input {
+  border: 1.5px solid var(--error) !important;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+/* Panel de respuesta */
+.response-panel {
+  display: none;
+  margin-top: 24px;
+  padding: 18px 20px;
+  border-radius: 10px;
+  border: 1.5px solid var(--line);
+}
+.response-panel.is-success { background: var(--ok-bg); border-color: var(--ok); }
+.response-panel.is-error { background: var(--error-bg); border-color: var(--error); }
+.response-heading { display: flex; align-items: center; gap: 10px; }
+.response-heading h2 { margin: 0; font-size: 1.15rem; }
+.response-panel p { margin: 8px 0 0; }
+.response-icon {
+  width: 24px; height: 24px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 700; font-size: .9rem;
+}
+.is-success .response-icon { background: var(--ok); }
+.is-success .response-icon::before { content: "✓"; }
+.is-error .response-icon { background: var(--error); }
+.is-error .response-icon::before { content: "!"; }
+.response-details { margin-top: 12px; }
+.response-details summary { cursor: pointer; font-weight: 600; }
+.response-details pre {
+  margin: 10px 0 0; padding: 12px;
+  background: #fff; border: 1px solid var(--line); border-radius: 8px;
+  overflow-x: auto; font-size: .85rem;
+}
+
+@media (max-width: 560px) {
+  .page-header h1 { font-size: 2rem; }
+  .form-card { padding: 20px; }
+  .form-grid, .test-fields { grid-template-columns: 1fr; }
+}
